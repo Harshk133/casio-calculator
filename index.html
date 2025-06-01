@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casio fx-991ES PLUS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="header">
+            <div class="branding">
+                <div class="casio">CASIO</div>
+                <div class="model">fx-991ES PLUS</div>
+            </div>
+            <div class="solar-panel"></div>
+        </div>
+        <input type="text" id="result" readonly>
+        <div class="buttons">
+            <button onclick="calculateFunction('sqrt')" class="function">√</button>
+            <button onclick="calculateFunction('square')" class="function">x²</button>
+            <button onclick="calculateFunction('power')" class="function">^</button>
+            <button onclick="calculateFunction('log')" class="function">log</button>
+            <button onclick="calculateFunction('ln')" class="function">ln</button>
+            <button onclick="calculateFunction('sin')" class="function">sin</button>
+            <button onclick="calculateFunction('cos')" class="function">cos</button>
+            <button onclick="calculateFunction('tan')" class="function">tan</button>
+            <button onclick="calculateFunction('hyp')" class="function">hyp</button>
+            <button onclick="calculateFunction('(-)')" class="function">(-)</button>
+            <button onclick="appendChar('7')">7</button>
+            <button onclick="appendChar('8')">8</button>
+            <button onclick="appendChar('9')">9</button>
+            <button onclick="deleteChar()" class="control">DEL</button>
+            <button onclick="clearAll()" class="control">AC</button>
+            <button onclick="appendChar('4')">4</button>
+            <button onclick="appendChar('5')">5</button>
+            <button onclick="appendChar('6')">6</button>
+            <button onclick="appendChar('×')" class="operator">×</button>
+            <button onclick="appendChar('÷')" class="operator">÷</button>
+            <button onclick="appendChar('1')">1</button>
+            <button onclick="appendChar('2')">2</button>
+            <button onclick="appendChar('3')">3</button>
+            <button onclick="appendChar('+')" class="operator">+</button>
+            <button onclick="appendChar('-')" class="operator">-</button>
+            <button onclick="appendChar('0')">0</button>
+            <button onclick="appendChar('.')">.</button>
+            <button onclick="appendChar('×10^')">×10<sup>x</sup></button>
+            <button onclick="appendChar('Ans')">Ans</button>
+            <button onclick="calculate()" class="equals">=</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
