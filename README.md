@@ -30,3 +30,7 @@ Open `index.html` in your web browser to use the calculator.
 - Clear: Escape
 - Delete: Backspace
 - Parentheses: (, )
+
+## Documentation
+
+The technical documentation for the JavaScript code can be found [here](./docs/index.html).
