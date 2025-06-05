@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: script.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: script.js</h1>
+
+
+
+
+
+
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * कॅल्क्युलेटरचे डिस्प्ले एलिमेंट
+ * @type {HTMLInputElement}
+ */
+const result = document.getElementById("result");
+
+/**
+ * मेमरी मध्ये साठवलेली व्हॅल्यू
+ * @type {number}
+ */
+let memory = 0;
+
+/**
+ * शेवटचे कॅल्क्युलेट केलेले उत्तर
+ * @type {number}
+ */
+let lastAnswer = 0;
+
+/**
+ * डिस्प्ले मध्ये नवीन कॅरेक्टर जोडते
+ * @param {string} char - जोडण्यासाठीचा कॅरेक्टर
+ */
+function appendChar(char) {
+  if (result.value === "Error") {
+    clearDisplay();
+  }
+  result.value += char;
+}
+
+/**
+ * डिस्प्ले साफ करते
+ */
+function clearDisplay() {
+  result.value = "";
+}
+
+/**
+ * डिस्प्ले, मेमरी आणि शेवटचे उत्तर साफ करते
+ */
+function clearAll() {
+  clearDisplay();
+  memory = 0;
+  lastAnswer = 0;
+}
+
+/**
+ * डिस्प्ले मधून शेवटचा कॅरेक्टर काढून टाकते
+ */
+function deleteChar() {
+  result.value = result.value.slice(0, -1);
+}
+
+/**
+ * विविध गणिती फंक्शन्स कॅल्क्युलेट करते
+ * @param {string} type - फंक्शनचा प्रकार (sqrt, square, power, log, ln, sin, cos, tan, hyp, (-))
+ */
+function calculateFunction(type) {
+  try {
+    const currentValue = parseFloat(result.value) || 0;
+    switch (type) {
+      case "sqrt":
+        result.value = Math.sqrt(currentValue);
+        break;
+      case "square":
+        result.value = Math.pow(currentValue, 2);
+        break;
+      case "power":
+        appendChar("^");
+        break;
+      case "log":
+        result.value = Math.log10(currentValue);
+        break;
+      case "ln":
+        result.value = Math.log(currentValue);
+        break;
+      case "sin":
+        result.value = Math.sin((currentValue * Math.PI) / 180);
+        break;
+      case "cos":
+        result.value = Math.cos((currentValue * Math.PI) / 180);
+        break;
+      case "tan":
+        result.value = Math.tan((currentValue * Math.PI) / 180);
+        break;
+      case "hyp":
+        // Placeholder for hyperbolic functions
+        break;
+      case "(-)":
+        result.value = -currentValue;
+        break;
+    }
+  } catch (error) {
+    result.value = "Error";
+  }
+}
+
+/**
+ * डिस्प्ले मधील एक्सप्रेशन कॅल्क्युलेट करते
+ * गणिती चिन्हे जावास्क्रिप्ट ऑपरेटर्समध्ये कन्व्हर्ट करते
+ * π आणि Ans सारख्या स्पेशल व्हॅल्यूज हँडल करते
+ */
+function calculate() {
+  try {
+    let expression = result.value;
+
+    // Replace mathematical symbols with JavaScript operators
+    expression = expression.replace(/×/g, "*");
+    expression = expression.replace(/÷/g, "/");
+    expression = expression.replace(/\^/g, "**");
+    expression = expression.replace(/π/g, Math.PI);
+    expression = expression.replace(/Ans/g, lastAnswer);
+
+    // Handle scientific notation
+    expression = expression.replace(/×10\^(\d+)/g, "*Math.pow(10,$1)");
+
+    const answer = eval(expression);
+    if (isFinite(answer)) {
+      result.value = answer;
+      lastAnswer = answer;
+    } else {
+      result.value = "Error";
+    }
+  } catch (error) {
+    result.value = "Error";
+  }
+}
+
+/**
+ * कीबोर्ड इनपुट हँडल करते
+ * नंबर्स (0-9), ऑपरेटर्स (+,-,*,/), एंटर, बॅकस्पेस, एस्केप आणि कंस सपोर्ट करते
+ */
+document.addEventListener("keydown", (event) => {
+  const key = event.key;
+
+  if ((key >= "0" &amp;&amp; key &lt;= "9") || key === ".") {
+    appendChar(key);
+  } else if (key === "+" || key === "-" || key === "*" || key === "/") {
+    appendChar(key);
+  } else if (key === "Enter") {
+    calculate();
+  } else if (key === "Backspace") {
+    deleteChar();
+  } else if (key === "Escape") {
+    clearDisplay();
+  } else if (key === "(" || key === ")") {
+    appendChar(key);
+  }
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#appendChar">appendChar</a></li><li><a href="global.html#calculate">calculate</a></li><li><a href="global.html#calculateFunction">calculateFunction</a></li><li><a href="global.html#clearAll">clearAll</a></li><li><a href="global.html#clearDisplay">clearDisplay</a></li><li><a href="global.html#deleteChar">deleteChar</a></li><li><a href="global.html#lastAnswer">lastAnswer</a></li><li><a href="global.html#memory">memory</a></li><li><a href="global.html#result">result</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Jun 05 2025 10:47:56 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
